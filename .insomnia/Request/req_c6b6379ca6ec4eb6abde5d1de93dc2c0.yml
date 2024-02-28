@@ -1,0 +1,31 @@
+_id: req_c6b6379ca6ec4eb6abde5d1de93dc2c0
+type: Request
+parentId: wrk_b2a01375e55d4e46a7d3abcbc54b5aa1
+modified: 1709142638031
+created: 1708636853908
+url: localhost:5000/v1/user/create
+name: create-user
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"username": "m-d-nabeel_ashar",
+    	"name": "nabeel"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/2023.5.8
+authentication: {}
+metaSortKey: -1708636853908
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

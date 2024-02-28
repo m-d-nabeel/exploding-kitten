@@ -1,0 +1,23 @@
+_id: req_01bcd7481363439284de665e0342f7d0
+type: Request
+parentId: wrk_b2a01375e55d4e46a7d3abcbc54b5aa1
+modified: 1709142496968
+created: 1708636832032
+url: localhost:5000/v1/healthz
+name: health
+description: ""
+method: GET
+body: {}
+parameters: []
+headers:
+  - name: User-Agent
+    value: insomnia/2023.5.8
+authentication: {}
+metaSortKey: -1708636832032
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

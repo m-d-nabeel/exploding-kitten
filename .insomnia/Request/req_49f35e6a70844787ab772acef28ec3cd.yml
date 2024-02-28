@@ -1,0 +1,28 @@
+_id: req_49f35e6a70844787ab772acef28ec3cd
+type: Request
+parentId: wrk_b2a01375e55d4e46a7d3abcbc54b5aa1
+modified: 1709144638207
+created: 1709142499295
+url: localhost:5000/v1/user/get
+name: get-details
+description: ""
+method: GET
+body: {}
+parameters: []
+headers:
+  - name: User-Agent
+    value: insomnia/2023.5.8
+    id: pair_8354342c83154dc78bc4465385af847b
+  - id: pair_75048eecfe3547838a151139d7f9c5fb
+    name: Authorization
+    value: ApiKey m-d-nabeel
+    description: ""
+authentication: {}
+metaSortKey: -1709142499295
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
