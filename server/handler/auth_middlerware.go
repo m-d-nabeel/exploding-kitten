@@ -21,13 +21,12 @@ func (apiCfgHandlr *apiConfigHandler) MiddlewareAuth(handler authHandler) http.H
 		redisDBCtrl := database.RedisDBController{
 			ApiConfig: apiCfgHandlr.ApiConfig,
 		}
-		data, err := redisDBCtrl.Get(r.Context(), "user:"+apiKey)
+		data, err := redisDBCtrl.GetUserDetail(r.Context(), "user:"+apiKey)
 		if err != nil {
 			utils.RespondWithError(w, http.StatusInternalServerError, "Failed to get user")
 			log.Println("Failed to get user: ", err)
 			return
 		}
-		log.Println("Data: ", data)
 		handler(w, r, data)
 	}
 }

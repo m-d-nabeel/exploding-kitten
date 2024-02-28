@@ -35,6 +35,6 @@ func (apiCfgHandlr *apiConfigHandler) HandlerCreateUser(w http.ResponseWriter, r
 	utils.RespondWithJSON(w, http.StatusOK, user)
 }
 
-func (apiCfgHandlr *apiConfigHandler) Get(w http.ResponseWriter, r *http.Request, user interface{}) {
-	utils.RespondWithJSON(w, http.StatusOK, user)
+func (apiCfgHandlr *apiConfigHandler) Get(w http.ResponseWriter, r *http.Request, data interface{}) {
+	utils.RespondWithJSON(w, http.StatusOK, data)
 }

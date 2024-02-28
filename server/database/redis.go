@@ -37,7 +37,7 @@ func (redisDBCtrl *RedisDBController) Insert(ctx context.Context, payload interf
 	return nil
 }
 
-func (redisDBCtrl *RedisDBController) Get(ctx context.Context, key string) (interface{}, error) {
+func (redisDBCtrl *RedisDBController) GetAnything(ctx context.Context, key string) (interface{}, error) {
 	value, err := redisDBCtrl.DB.Get(ctx, key).Result()
 	if errors.Is(err, redis.Nil) {
 		return nil, errors.New("key not found")
@@ -68,6 +68,32 @@ func (redisDBCtrl *RedisDBController) Get(ctx context.Context, key string) (inte
 	}
 
 	return data, nil
+}
+
+func (redisDBCtrl *RedisDBController) GetUserDetail(ctx context.Context, key string) (*models.User, error) {
+	value, err := redisDBCtrl.DB.Get(ctx, key).Result()
+	if errors.Is(err, redis.Nil) {
+		return nil, errors.New("key not found")
+	} else if err != nil {
+		return nil, fmt.Errorf("error getting key: %w", err)
+	}
+
+	if !strings.Contains(key, ":") {
+		return nil, errors.New("invalid key")
+	}
+
+	modelType := strings.Split(key, ":")[0]
+	if modelType != "user" {
+		return nil, errors.New("invalid key")
+	}
+	var data = models.User{}
+
+	err = json.Unmarshal([]byte(value), &data)
+	if err != nil {
+		return nil, fmt.Errorf("error unmarshalling card: %w", err)
+	}
+
+	return &data, nil
 }
 
 func (redisDBCtrl *RedisDBController) Delete(ctx context.Context, key string) error {
@@ -105,7 +131,7 @@ func (redisDBCtrl *RedisDBController) GetTop10Scorers(ctx context.Context) ([]mo
 	}
 
 	for _, key := range keys {
-		game, err := redisDBCtrl.Get(ctx, key)
+		game, err := redisDBCtrl.GetAnything(ctx, key)
 		if err != nil {
 			return nil, err
 		}
@@ -122,7 +148,7 @@ func (redisDBCtrl *RedisDBController) GetTop10Scorers(ctx context.Context) ([]mo
 		if i >= len(games) {
 			break
 		}
-		user, err := redisDBCtrl.Get(ctx, "user:"+games[i].UserId.String())
+		user, err := redisDBCtrl.GetAnything(ctx, "user:"+games[i].UserId.String())
 
 		if err != nil {
 			return nil, err
