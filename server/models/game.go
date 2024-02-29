@@ -29,18 +29,18 @@ type Game struct {
 	CreatedAt   time.Time  `json:"created_at"`
 	UpdatedAt   time.Time  `json:"updated_at"`
 	UserId      uuid.UUID  `json:"user_id"`
-	Deck        [5]Card    `json:"deck"`
+	Deck        []Card     `json:"deck"`
 	DiffuseCard int        `json:"diffuse_card"`
 	Status      GameStatus `json:"status"`
 	Score       int        `json:"score"`
 }
 
-func GetRandomCards() [5]Card {
-	deck := [5]Card{}
+func GetRandomCards() []Card {
+	deck := []Card{}
 	size := 5
 	for i := 0; i < size; i++ {
 		rndIdx := rand.Intn(len(CardTypes))
-		deck[i] = NewCard(CardTypes[rndIdx])
+		deck = append(deck, NewCard(CardTypes[rndIdx]))
 	}
 	return deck
 }

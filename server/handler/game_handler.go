@@ -90,11 +90,17 @@ func (apiCfgHandlr *apiConfigHandler) HandlerGameMove(w http.ResponseWriter, r *
 		}
 	}
 
-	modifiedGame, err := utils.GetGameResultForMove(activeGame, &cardType)
+	if cardType == models.EmptyCard {
+		utils.RespondWithError(w, http.StatusBadRequest, "Invalid cardId")
+		return
+	}
+
+	modifiedGame, err := utils.GetGameResultForMove(activeGame, cardType)
 	if err != nil {
 		utils.RespondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
+
 	err = redisDBCtrl.SaveGameDetails(r.Context(), activeGameId, modifiedGame)
 	if err != nil {
 		utils.RespondWithError(w, http.StatusInternalServerError, err.Error())

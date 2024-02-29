@@ -1,18 +1,23 @@
 package utils
 
-import "github.com/m-d-nabeel/exploding-kittens/models"
+import (
+	"github.com/m-d-nabeel/exploding-kittens/models"
+)
 
-func GetGameResultForMove(game *models.Game, cardType *models.CardType) (*models.Game, error) {
-	switch *cardType {
+func GetGameResultForMove(game *models.Game, cardType models.CardType) (*models.Game, error) {
+	if game.Status == models.FinishedGame {
+		return game, nil
+	}
+	switch cardType {
 	case models.DiffuseCard:
 		game.DiffuseCard++
 		game.Score += 2
-		game.Deck = [5]models.Card(removeCardFromDeck(game.Deck, models.Card{Type: models.DiffuseCard}))
+		removeCardFromDeck(&game.Deck, models.DiffuseCard)
 	case models.ExplodingCard:
 		if game.DiffuseCard > 0 {
 			game.DiffuseCard--
 			game.Score += 5
-			game.Deck = [5]models.Card(removeCardFromDeck(game.Deck, models.Card{Type: models.ExplodingCard}))
+			removeCardFromDeck(&game.Deck, models.ExplodingCard)
 		} else {
 			game.Status = models.FinishedGame
 		}
@@ -20,17 +25,16 @@ func GetGameResultForMove(game *models.Game, cardType *models.CardType) (*models
 		game.Deck = models.GetRandomCards()
 	case models.CatCard:
 		game.Score += 1
-		game.Deck = [5]models.Card(removeCardFromDeck(game.Deck, models.Card{Type: models.CatCard}))
+		removeCardFromDeck(&game.Deck, models.CatCard)
 	}
-	return nil, nil
+	return game, nil
 }
 
-func removeCardFromDeck(deck [5]models.Card, card models.Card) [5]models.Card {
-	for _, c := range deck {
-		if c.ID == card.ID {
-			c.Type = models.EmptyCard
+func removeCardFromDeck(deck *[]models.Card, cardToRemoveType models.CardType) {
+	for i := range len(*deck) {
+		if (*deck)[i].Type == cardToRemoveType {
+			(*deck)[i] = models.NewCard(models.EmptyCard)
 			break
 		}
 	}
-	return deck
 }
