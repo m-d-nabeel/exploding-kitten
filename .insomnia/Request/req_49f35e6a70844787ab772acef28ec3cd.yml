@@ -1,9 +1,9 @@
 _id: req_49f35e6a70844787ab772acef28ec3cd
 type: Request
 parentId: wrk_b2a01375e55d4e46a7d3abcbc54b5aa1
-modified: 1709144638207
+modified: 1709204307571
 created: 1709142499295
-url: localhost:5000/v1/user/get
+url: localhost:5000/v1/game/details
 name: get-details
 description: ""
 method: GET
@@ -15,8 +15,9 @@ headers:
     id: pair_8354342c83154dc78bc4465385af847b
   - id: pair_75048eecfe3547838a151139d7f9c5fb
     name: Authorization
-    value: ApiKey m-d-nabeel
+    value: ApiKey Md_Nabeel_Ashar
     description: ""
+    disabled: false
 authentication: {}
 metaSortKey: -1709142499295
 isPrivate: false
