@@ -34,14 +34,14 @@ func getRandomCards() [5]Card {
 	return deck
 }
 
-func NewGame(userId uuid.UUID) Game {
+func NewGame(userId uuid.UUID, status GameStatus) Game {
 	deck := getRandomCards()
 	return Game{
 		ID:        uuid.New(),
 		CreatedAt: time.Now().UTC(),
 		UpdatedAt: time.Now().UTC(),
 		UserId:    userId,
-		Status:    ActiveGame,
+		Status:    status,
 		Score:     0,
 		Deck:      deck,
 	}
