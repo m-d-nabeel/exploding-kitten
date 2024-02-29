@@ -27,3 +27,15 @@ func (redisDBCtrl *RedisDBController) GetGameDetails(ctx context.Context, gameId
 	}
 	return &game, nil
 }
+
+func (redisDBCtrl *RedisDBController) SaveGameDetails(ctx context.Context, gameId string, modifiedGame *models.Game) error {
+	gameBytes, err := json.Marshal(modifiedGame)
+	if err != nil {
+		return err
+	}
+	err = redisDBCtrl.DB.Set(ctx, gameId, gameBytes, 0).Err()
+	if err != nil {
+		return err
+	}
+	return nil
+}

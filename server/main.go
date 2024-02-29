@@ -51,7 +51,9 @@ func main() {
 	userRouter.Get("/details", apiHandler.MiddlewareAuth(apiHandler.GetUserDetails))
 
 	// GAME ROUTES
-	gameRouter.Get("/details", apiHandler.MiddlewareAuth(apiHandler.GetAllGameDetails))
+	gameRouter.Get("/details", apiHandler.MiddlewareAuth(apiHandler.HandlerGetAllGameDetails))
+	gameRouter.Get("/top-scores", apiHandler.MiddlewareAuth(apiHandler.HandlerGetTopScores))
+	gameRouter.Post("/active-game/{cardId}", apiHandler.MiddlewareAuth(apiHandler.HandlerGameMove))
 
 	// START SERVER
 	server := &http.Server{

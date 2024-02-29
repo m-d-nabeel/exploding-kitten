@@ -10,12 +10,13 @@ type CardType string
 
 const (
 	CatCard       CardType = "Cat"
-	DefuseCard    CardType = "Defuse"
+	DiffuseCard   CardType = "Diffuse"
 	ShuffleCard   CardType = "Shuffle"
 	ExplodingCard CardType = "Exploding"
+	EmptyCard     CardType = ""
 )
 
-var CardTypes = []CardType{CatCard, DefuseCard, ShuffleCard, ExplodingCard}
+var CardTypes = []CardType{CatCard, DiffuseCard, ShuffleCard, ExplodingCard}
 
 type Card struct {
 	ID        uuid.UUID `json:"id"`
